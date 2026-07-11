@@ -98,10 +98,15 @@
   form .btn-main{width:100%;margin-top:24px}
   .hint{text-align:center;color:var(--muted);font-size:13px;margin-top:14px}
   .ok{display:none;text-align:center;padding:20px}
-  .ok .check{width:64px;height:64px;border-radius:50%;background:var(--grad);margin:0 auto 18px;
-    display:flex;align-items:center;justify-content:center;font-size:32px;color:#0a0a12}
+  .ok .spin{width:64px;height:64px;border-radius:50%;margin:0 auto 20px;
+    border:5px solid rgba(255,255,255,.12);border-top-color:var(--cyan);
+    animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
   .ok h3{font-size:22px;margin-bottom:8px}
   .ok p{color:var(--muted)}
+  .ok .eta{display:inline-block;margin-top:16px;padding:10px 20px;border-radius:999px;
+    background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.35);
+    color:var(--cyan);font-weight:700;font-size:15px}
   .err{display:none;color:#fca5a5;text-align:center;margin-top:14px;font-size:14px}
 
   footer{text-align:center;padding:40px 0 50px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
@@ -212,9 +217,11 @@
     </form>
 
     <div class="ok" id="ok">
-      <div class="check">✓</div>
-      <h3>¡Recibido! 🎉</h3>
-      <p>Ya nos llegó tu pedido. Ángel te arma la página y te escribe al WhatsApp con el link muy pronto.</p>
+      <div class="spin"></div>
+      <h3>Estamos creando tu página… ⚙️</h3>
+      <p>Ya recibimos tu pedido y arrancamos a armarla ahora mismo.<br>
+         Volvé en unos <b>15 minutos</b>: para entonces tu página va a estar lista y te mandamos el link directo al WhatsApp.</p>
+      <span class="eta">⏳ Lista en ~15 minutos</span>
     </div>
   </section>
 
@@ -231,7 +238,7 @@
     var btn = document.getElementById('send');
     var err = document.getElementById('err');
     err.style.display = 'none';
-    btn.textContent = 'Enviando...';
+    btn.textContent = 'Procesando tu pedido…';
     btn.disabled = true;
     var payload = {
       negocio: document.getElementById('negocio').value,
